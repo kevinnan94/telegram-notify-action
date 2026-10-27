@@ -6,7 +6,7 @@ no third-party dependencies: just `curl` and the Bot API.
 ## Usage
 
 ```yaml
-- uses: kevinnan94/telegram-notify-action@v1
+- uses: kevinnan94/telegram-notify-action@v1.0.1.0.1
   with:
     token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
     chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -20,7 +20,7 @@ Notify only on failure:
 
 ```yaml
 - if: failure()
-  uses: kevinnan94/telegram-notify-action@v1
+  uses: kevinnan94/telegram-notify-action@v1.0.1.0.1
   with:
     token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
     chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
