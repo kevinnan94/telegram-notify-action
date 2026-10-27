@@ -1,0 +1,42 @@
+name: "Telegram Notify"
+description: "Send a Telegram message from a workflow. Small, dependency-free, HTML-safe."
+author: "kevinnan94"
+branding:
+  icon: "send"
+  color: "blue"
+inputs:
+  token:
+    description: "Telegram bot token (store it as a secret)"
+    required: true
+  chat_id:
+    description: "Target chat id (user, group or channel)"
+    required: true
+  message:
+    description: "Message text. Supports Telegram HTML tags (<b>, <i>, <code>, <a>)"
+    required: true
+  parse_mode:
+    description: "HTML or MarkdownV2 (default HTML)"
+    required: false
+    default: "HTML"
+  disable_preview:
+    description: "Disable link previews"
+    required: false
+    default: "true"
+outputs:
+  message_id:
+    description: "Id of the sent message"
+    value: ${{ steps.send.outputs.message_id }}
+runs:
+  using: "composite"
+  steps:
+    - id: send
+      shell: bash
+      env:
+        TG_TOKEN: ${{ inputs.token }}
+        TG_CHAT_ID: ${{ inputs.chat_id }}
+        TG_MESSAGE: ${{ inputs.message }}
+        TG_PARSE_MODE: ${{ inputs.parse_mode }}
+        TG_DISABLE_PREVIEW: ${{ inputs.disable_preview }}
+      run: |
+        id=$("${{ github.action_path }}/notify.sh")
+        echo "message_id=$id" >> "$GITHUB_OUTPUT"
