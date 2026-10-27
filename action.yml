@@ -38,5 +38,5 @@ runs:
         TG_PARSE_MODE: ${{ inputs.parse_mode }}
         TG_DISABLE_PREVIEW: ${{ inputs.disable_preview }}
       run: |
-        id=$("${{ github.action_path }}/notify.sh")
+        id=$(bash "${{ github.action_path }}/notify.sh")
         echo "message_id=$id" >> "$GITHUB_OUTPUT"
